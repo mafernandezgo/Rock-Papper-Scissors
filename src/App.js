@@ -1,7 +1,6 @@
-import logo from "./logo.svg"
 import "./App.css"
 import Header from "./Components/Header"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "./Components/Button"
 import Result from "./Components/Section"
 import Modal from "./Components/Modal"
@@ -12,6 +11,23 @@ function App() {
   const [winPoint, setWinPoint] = useState("")
   const [randomButton, setRandomButton] = useState()
   const [rulesModal, setRulesModal] = useState(false)
+
+  useEffect(() => {
+    if (btnSelected) {
+      if (
+        (btnSelected === "scissors" && randomButton === "paper") ||
+        (btnSelected === "paper" && randomButton === "rock") ||
+        (btnSelected === "rock" && randomButton === "scissors")
+      ) {
+        setWinPoint("You Win")
+        setScore(score + 1)
+      } else if (btnSelected === randomButton && btnSelected !== null) {
+        setWinPoint("It's a Tie")
+      } else {
+        setWinPoint("You Lose")
+      }
+    }
+  }, [btnSelected])
 
   const buttonsList = [
     {
@@ -41,7 +57,6 @@ function App() {
     setBtnSelected(null)
     setRandomButton(null)
     setWinPoint("")
-    setScore(winPoint === "You Win" ? score + 1 : score)
   }
 
   return (

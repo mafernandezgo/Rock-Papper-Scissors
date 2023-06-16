@@ -1,35 +1,7 @@
 import Button from "../Button/index"
 
 export default function Result(props) {
-  const { btnSelected, randomButton, winPoint, setWinPoint, playAgainHandler } =
-    props
-
-  function winnerHandler() {
-    if (
-      (btnSelected === "scissors" && randomButton === "paper") ||
-      (btnSelected === "papel" && randomButton === "rock") ||
-      (btnSelected === "rock" && randomButton === "scissors")
-    ) {
-      setWinPoint("You Win")
-    } else if (btnSelected === randomButton) {
-      setWinPoint("It's a Tie")
-    } else {
-      setWinPoint("You Lose")
-    }
-  }
-
-  const timer = setTimeout(console.log("hola"), 2000)
-
-  function housePicked() {
-    return (
-      <section className={winPoint === "You Lose" ? "win" : ""}>
-        <h3>The House Picked</h3>
-        <Button value={randomButton} />
-      </section>
-    )
-  }
-
-  winnerHandler()
+  const { btnSelected, randomButton, winPoint, playAgainHandler } = props
 
   return (
     <div className="Results">
@@ -48,7 +20,6 @@ export default function Result(props) {
       <section className={winPoint === "You Lose" ? "win" : ""}>
         <h3>The House Picked</h3>
         <Button value={randomButton} />
-        {/* {timer} */}
       </section>
     </div>
   )
